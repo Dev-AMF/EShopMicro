@@ -9,12 +9,14 @@ namespace Catalog.Api
                 // Add services to the container.
 
                 builder.Services.AddControllers();
+                
+                builder.Services.AddMediatR(config =>
+                {
+                    config.RegisterServicesFromAssembly(typeof(Program).Assembly);
+                });
 
-            
+
             }
-
-
-
 
             var app = builder.Build();
             {
