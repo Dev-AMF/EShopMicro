@@ -1,4 +1,6 @@
-﻿namespace Catalog.Api.UseCases.Products
+﻿using Catalog.Api.UseCases.Commands;
+
+namespace Catalog.Api.UseCases.Products.CreateProduct
 {
     public record CreateProductRequest(string Name, List<string> Category, string Description,
                                       string ImageFile, decimal Price);
@@ -7,7 +9,7 @@
 
     [ApiController]
     [Route("[controller]")]
-    public class ProductsController : ControllerBase
+    public partial class ProductsController : ControllerBase
     {
         private readonly IMediator _meditor;
         public ProductsController(IMediator mediator)
@@ -30,4 +32,4 @@
     }
 
 
-    }
+}
