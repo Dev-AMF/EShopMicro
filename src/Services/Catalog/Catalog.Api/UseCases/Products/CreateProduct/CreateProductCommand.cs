@@ -1,4 +1,5 @@
 ﻿using Catalog.Api.UseCases.Products.GetProducts;
+using Catalog.Api.UseCases.Products.IValidators;
 
 namespace Catalog.Api.UseCases.Products.CreateProduct
 {
@@ -8,19 +9,24 @@ namespace Catalog.Api.UseCases.Products.CreateProduct
     {
         private readonly IDocumentSession _session;
         private readonly ILogger<CreateProductCommandHandler> _logger;
-        public CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommandHandler> logger)
+        private readonly ICommandValidator<CreateProductRequest> _validator;
+        public CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommandHandler> logger,
+                                           ICommandValidator<CreateProductRequest> validator)
         {
             _session = session;
             _logger = logger;
+            _validator = validator;
         }
 
         public async Task<CreateProductResponse> Handle(CreateProductCommand query, CancellationToken cancellationToken)
         {
             _logger.LogInformation($"DeleteProductCommandHnadler ==> Called With {query.req}");
 
-            //Bussiness Logic To Create a Product   
+            await _validator.ValidateAsync(query.req);
 
-            var product = new Product
+          //Bussiness Logic To Create a Product   
+
+          var product = new Product
             {
                 Name = query.req.Name,
                 Category = query.req.Category,

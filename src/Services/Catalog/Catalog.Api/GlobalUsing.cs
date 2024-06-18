@@ -5,3 +5,5 @@ global using MediatR;
 global using Marten;
 global using Microsoft.AspNetCore.Mvc;
 global using Catalog.Api.Exceptions;
+global using FluentValidation;
+global using FluentValidation.Results;

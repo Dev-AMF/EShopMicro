@@ -9,6 +9,7 @@ namespace Catalog.Api.UseCases.Products.ProductsEndPoints
     public class ProductsCommandsController:ControllerBase
     {
         private readonly IMediator _meditor;
+
         public ProductsCommandsController(IMediator mediator)
         {
             _meditor = mediator;
