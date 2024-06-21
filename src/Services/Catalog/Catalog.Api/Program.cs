@@ -1,4 +1,4 @@
-using Catalog.Api.UseCases.Products.IValidators;
+using BuildingBlocks.Behaviours;
 
 namespace Catalog.Api
 {
@@ -10,23 +10,27 @@ namespace Catalog.Api
             {
                 // Add services to the container.
 
+                //Variebles
+                var assembly = typeof(Program).Assembly;
+                //
+
+
                 builder.Services.AddControllers();
 
                 builder.Services.AddMediatR(config =>
                 {
-                    config.RegisterServicesFromAssembly(typeof(Program).Assembly);
+                    config.RegisterServicesFromAssembly(assembly);
+                    config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
                 });
 
-                builder.Services.AddValidatorsFromAssembly((typeof(Program).Assembly));
+                builder.Services.AddValidatorsFromAssembly(assembly);
 
                 builder.Services.AddMarten(options =>
                 {
                     options.Connection(builder.Configuration.GetConnectionString("Database")!);
                 })
                     .UseLightweightSessions();
-
-
-                builder.Services.AddTransient(typeof(ICommandValidator<>), typeof(CommandValidator<>) );
+               
 
             }
 

@@ -1,7 +1,4 @@
-﻿using Catalog.Api.UseCases.Products.GetProducts;
-using Catalog.Api.UseCases.Products.IValidators;
-
-namespace Catalog.Api.UseCases.Products.CreateProduct
+﻿namespace Catalog.Api.UseCases.Products.CreateProduct
 {
     public record CreateProductCommand(CreateProductRequest req): ICommand<CreateProductResponse>;
 
@@ -9,30 +6,26 @@ namespace Catalog.Api.UseCases.Products.CreateProduct
     {
         private readonly IDocumentSession _session;
         private readonly ILogger<CreateProductCommandHandler> _logger;
-        private readonly ICommandValidator<CreateProductRequest> _validator;
-        public CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommandHandler> logger,
-                                           ICommandValidator<CreateProductRequest> validator)
+        public CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommandHandler> logger)
         {
             _session = session;
             _logger = logger;
-            _validator = validator;
         }
 
-        public async Task<CreateProductResponse> Handle(CreateProductCommand query, CancellationToken cancellationToken)
+        public async Task<CreateProductResponse> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"DeleteProductCommandHnadler ==> Called With {query.req}");
+            _logger.LogInformation($"CreateProductCommandHnadler ==> Called With {command.req}");
 
-            await _validator.ValidateAsync(query.req);
 
           //Bussiness Logic To Create a Product   
 
           var product = new Product
             {
-                Name = query.req.Name,
-                Category = query.req.Category,
-                Description = query.req.Description,
-                ImageFile = query.req.ImageFile,
-                Price = query.req.Price,
+                Name = command.req.Name,
+                Category = command.req.Category,
+                Description = command.req.Description,
+                ImageFile = command.req.ImageFile,
+                Price = command.req.Price,
             };
 
             _session.Store(product);
