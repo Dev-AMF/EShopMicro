@@ -1,9 +1,4 @@
-﻿using Catalog.Api.UseCases.Products.CreateProduct;
-using Catalog.Api.UseCases.Products.GetProductById;
-using Catalog.Api.UseCases.Products.GetProducts;
-using Catalog.Api.UseCases.Products.GetProductsByCategory;
-
-namespace Catalog.Api.UseCases.Products.ProductsEndPoints
+﻿namespace Catalog.Api.UseCases.Products.ProductsEndPoints
 {
     [ApiController]
     [Route("api/catalog/products/[Action]")]
