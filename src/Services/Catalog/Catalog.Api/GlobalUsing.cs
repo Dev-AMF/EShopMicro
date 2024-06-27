@@ -11,6 +11,7 @@ global using Catalog.Api.Exceptions;
 global using FluentValidation;
 global using FluentValidation.Results;
 global using Microsoft.AspNetCore.Diagnostics;
+global using Catalog.Api.DataSeed;
 global using Catalog.Api.UseCases.Products.CreateProduct;
 global using Catalog.Api.UseCases.Products.GetProductById;
 global using Catalog.Api.UseCases.Products.GetProducts;

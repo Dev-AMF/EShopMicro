@@ -1,3 +1,5 @@
+
+
 namespace Catalog.Api
 {
     public class Program
@@ -27,8 +29,11 @@ namespace Catalog.Api
                 builder.Services.AddMarten(options =>
                 {
                     options.Connection(builder.Configuration.GetConnectionString("Database")!);
-                })
-                    .UseLightweightSessions();
+                }
+                ).UseLightweightSessions();
+
+                if(builder.Environment.IsDevelopment())
+                   builder.Services.InitializeMartenWith<CatalogInitialData>();
 
                 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
             }
