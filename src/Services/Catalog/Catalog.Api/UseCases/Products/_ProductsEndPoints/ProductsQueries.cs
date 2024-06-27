@@ -12,9 +12,9 @@
 
 
         [HttpGet]
-        public async Task<IResult> GetProducts()
+        public async Task<IResult> GetProducts([FromQuery] GetProductsRequest request)
         {
-            var query = new GetProductsQuery();
+            var query = new GetProductsQuery(request);
 
             var result = await _meditor.Send(query);
 
