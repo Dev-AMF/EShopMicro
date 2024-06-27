@@ -5,16 +5,16 @@
     internal class CreateProductCommandHandler : ICommandHandler<CreateProductCommand, CreateProductResponse>
     {
         private readonly IDocumentSession _session;
-        private readonly ILogger<CreateProductCommandHandler> _logger;
-        public CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommandHandler> logger)
+     
+        public CreateProductCommandHandler(IDocumentSession session)
         {
             _session = session;
-            _logger = logger;
+  
         }
 
         public async Task<CreateProductResponse> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"CreateProductCommandHnadler ==> Called With {command.req}");
+          
 
 
           //Bussiness Logic To Create a Product   

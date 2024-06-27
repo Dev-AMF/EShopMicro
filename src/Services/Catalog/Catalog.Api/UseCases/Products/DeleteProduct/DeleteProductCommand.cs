@@ -8,17 +8,17 @@ namespace Catalog.Api.UseCases.Products.DeleteProduct
     internal class DeleteProductCommandHnadler : ICommandHandler<DeleteProductCommand, DeleteProductResponse>
     {
         private readonly IDocumentSession _session;
-        private readonly ILogger<DeleteProductCommandHnadler> _logger;
 
-        public DeleteProductCommandHnadler(IDocumentSession session, ILogger<DeleteProductCommandHnadler> logger)
+
+        public DeleteProductCommandHnadler(IDocumentSession session)
         {
             _session = session;
-            _logger = logger;
+
         }
 
         public async Task<DeleteProductResponse> Handle(DeleteProductCommand query, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"DeleteProductCommandHnadler ==> Called With {query.req}");
+          
 
             _session.Delete<Product>(query.req.id);
             await _session.SaveChangesAsync(cancellationToken);

@@ -8,17 +8,17 @@ namespace Catalog.Api.UseCases.Products.GetProductsByCategory
     internal class GetProductsByCategoryQueryHandler : IQueryHandler<GetProductsByCategoryQuery, GetProductsByCategoryResponse>
     {
         private readonly IDocumentSession _session;
-        private readonly ILogger<GetProductsByCategoryQueryHandler> _logger;
+      
 
-        public GetProductsByCategoryQueryHandler(IDocumentSession session, ILogger<GetProductsByCategoryQueryHandler> logger)
+        public GetProductsByCategoryQueryHandler(IDocumentSession session)
         {
             _session = session;
-            _logger = logger;
+
         }
 
         public async Task<GetProductsByCategoryResponse> Handle(GetProductsByCategoryQuery query, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"GetProductsByCategoryQueryHandler ==> Called With {query.req}");
+          
 
             var product = await _session.Query<Product>()
                                         .Where(p => p.Category.Contains(query.req.category))

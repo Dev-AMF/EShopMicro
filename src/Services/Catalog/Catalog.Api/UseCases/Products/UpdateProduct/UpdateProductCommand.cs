@@ -7,17 +7,17 @@ namespace Catalog.Api.UseCases.Products.UpdateProduct
     internal class UpdateProductCommandHandler : ICommandHandler<UpdateProductCommand, UpdateProductResponse>
     {
         private readonly IDocumentSession _session;
-        private readonly ILogger<UpdateProductCommandHandler> _logger;
+      
 
-        public UpdateProductCommandHandler(IDocumentSession session, ILogger<UpdateProductCommandHandler> logger)
+        public UpdateProductCommandHandler(IDocumentSession session)
         {
             _session = session;
-            _logger = logger;
+
         }
 
         public async Task<UpdateProductResponse> Handle(UpdateProductCommand query, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"UpdateProductCommandHandler ==> Called With {query.req}");
+            
 
             var product = await _session.LoadAsync<Product>(query.req.Id, cancellationToken);
 

@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace BuildingBlocks.CQRS
+﻿namespace BuildingBlocks.CQRS
 {
     public interface ICommand : ICommand<Unit> //Unit is Somewhat void in MediatR
     { 

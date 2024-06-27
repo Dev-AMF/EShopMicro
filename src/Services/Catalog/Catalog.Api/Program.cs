@@ -19,6 +19,7 @@ namespace Catalog.Api
                 {
                     config.RegisterServicesFromAssembly(assembly);
                     config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+                    config.AddOpenBehavior(typeof(LoggingBehaviour<,>));
                 });
 
                 builder.Services.AddValidatorsFromAssembly(assembly);
