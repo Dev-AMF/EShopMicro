@@ -16,7 +16,7 @@
         }
         #endregion
 
-
+         
         //CTOR Part
         #region CTOR
         public LoggingBehaviour(ILogger<LoggingBehaviour<TRequest, TResponse>> logger)
