@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>4a1c644e-2bda-44e2-baca-a9ded09f3a0f</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="Models\" />
+    <Folder Include="UseCases\CheckoutBasket\" />
+    <Folder Include="UseCases\DeleteBasket\" />
+    <Folder Include="UseCases\GetBasket\" />
+    <Folder Include="UseCases\StoreBasket\" />
+    <Folder Include="UseCases\_BasketEndpoints\" />
+  </ItemGroup>
+
+</Project>
