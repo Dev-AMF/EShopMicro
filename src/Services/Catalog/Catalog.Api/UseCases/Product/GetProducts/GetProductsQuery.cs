@@ -1,6 +1,8 @@
 ﻿namespace Catalog.Api.UseCases.Products.GetProducts
 {
     public record GetProductsQuery(GetProductsRequest req) : IQuery<GetProductsResponse>;
+
+
     internal class GetProductsQueryHandler : IQueryHandler<GetProductsQuery, GetProductsResponse>
     {
         private readonly IDocumentSession _session;
