@@ -1,8 +1,9 @@
-﻿namespace Catalog.Api.UseCases.Products.ProductsEndPoints
+﻿using Catalog.Api.UseCases.Products._ProductsEndPoints;
+
+namespace Catalog.Api.UseCases.Products.ProductsEndPoints
 {
-    [ApiController]
-    [Route("api/catalog/products/[Action]")]
-    public class ProductsQueriesController : ControllerBase
+
+    public class ProductsQueriesController : ProductBaseController
     {
         private readonly IMediator _meditor;
         public ProductsQueriesController(IMediator mediator)

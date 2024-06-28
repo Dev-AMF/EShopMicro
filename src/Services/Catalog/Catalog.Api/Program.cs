@@ -1,5 +1,3 @@
-
-
 namespace Catalog.Api
 {
     public class Program
@@ -12,6 +10,7 @@ namespace Catalog.Api
 
                 //Variebles
                 var assembly = typeof(Program).Assembly;
+                var connString = builder.Configuration.GetConnectionString("Database");
                 //
 
 
@@ -28,24 +27,38 @@ namespace Catalog.Api
 
                 builder.Services.AddMarten(options =>
                 {
-                    options.Connection(builder.Configuration.GetConnectionString("Database")!);
+                    options.Connection(connString!);
                 }
                 ).UseLightweightSessions();
 
-                if(builder.Environment.IsDevelopment())
-                   builder.Services.InitializeMartenWith<CatalogInitialData>();
+                if (builder.Environment.IsDevelopment())
+                    builder.Services.InitializeMartenWith<CatalogInitialData>();
 
                 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+                builder.Services.AddHealthChecks().AddNpgSql(connString!);
+
+                builder.Services.AddControllers();
             }
+
 
             var app = builder.Build();
             {
                 // Configure the HTTP request pipeline.
 
+
                 app.UseHttpsRedirection();
+                app.UseRouting();
                 app.MapControllers();
 
                 app.UseExceptionHandler(options => { });
+
+            
+                app.UseHealthChecks("/api/catalog/health",
+                        new HealthCheckOptions
+                        {
+                            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                        });
 
                 #region OldExceptionHandler
                 //app.UseExceptionHandler(exceptionHandlerApp =>
