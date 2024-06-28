@@ -1,10 +1,10 @@
-﻿namespace Catalog.Api.UseCases.Products.ProductsEndPoints
+﻿namespace Catalog.Api.EndPoints.Product
 {
 
-    public class ProductsQueriesController : ProductBaseController
+    public class ProductQueriesController : ProductBaseController, IProductQueries
     {
         private readonly IMediator _meditor;
-        public ProductsQueriesController(IMediator mediator)
+        public ProductQueriesController(IMediator mediator)
         {
             _meditor = mediator;
         }
