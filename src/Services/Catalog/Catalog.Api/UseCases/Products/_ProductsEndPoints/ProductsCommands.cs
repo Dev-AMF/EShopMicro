@@ -1,6 +1,4 @@
-﻿using Catalog.Api.UseCases.Products._ProductsEndPoints;
-
-namespace Catalog.Api.UseCases.Products.ProductsEndPoints
+﻿namespace Catalog.Api.UseCases.Products.ProductsEndPoints
 {
 
     public class ProductsCommandsController: ProductBaseController
@@ -20,9 +18,7 @@ namespace Catalog.Api.UseCases.Products.ProductsEndPoints
 
             var result = await _meditor.Send(command);
 
-            var response = result.Adapt<CreateProductResponse>();
-
-            return Results.Created($"GetProductById/{response.id}", response);
+            return Results.Created($"GetProductById/{result.id}", result);
         }
 
         [HttpPost]

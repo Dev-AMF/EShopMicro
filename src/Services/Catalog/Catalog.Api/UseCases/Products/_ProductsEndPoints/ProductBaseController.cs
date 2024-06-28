@@ -1,5 +1,4 @@
-﻿
-namespace Catalog.Api.UseCases.Products._ProductsEndPoints
+﻿namespace Catalog.Api.UseCases.Products._ProductsEndPoints
 {
     [Route("api/catalog/products/[Action]")]
     [ApiController]

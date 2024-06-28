@@ -13,6 +13,7 @@ global using MediatR;
 
 global using Marten;
 global using Marten.Pagination;
+global using Marten.Schema;
 
 global using FluentValidation;
 global using FluentValidation.Results;
@@ -27,7 +28,9 @@ global using Catalog.Api.UseCases.Products.DeleteProduct;
 global using Catalog.Api.UseCases.Products.CreateProduct;
 global using Catalog.Api.UseCases.Products.UpdateProduct;
 global using Catalog.Api.UseCases.Products.GetProductById;
+global using Catalog.Api.UseCases.Products._ProductsEndPoints;
 global using Catalog.Api.UseCases.Products.GetProductsByCategory;
+
 
 
 

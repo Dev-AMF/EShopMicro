@@ -1,12 +1,10 @@
-﻿using Marten.Schema;
-
-namespace Catalog.Api.DataSeed
+﻿namespace Catalog.Api.DataSeed
 {
     public class CatalogInitialData : IInitialData
     {
         public async Task Populate(IDocumentStore store, CancellationToken cancellation)
         {
-            using var session = store.LightweightSession();
+            await using var session = store.LightweightSession();
 
             if (await session.Query<Product>().AnyAsync())
                 return;

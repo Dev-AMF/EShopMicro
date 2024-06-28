@@ -1,6 +1,4 @@
-﻿using Catalog.Api.UseCases.Products._ProductsEndPoints;
-
-namespace Catalog.Api.UseCases.Products.ProductsEndPoints
+﻿namespace Catalog.Api.UseCases.Products.ProductsEndPoints
 {
 
     public class ProductsQueriesController : ProductBaseController
