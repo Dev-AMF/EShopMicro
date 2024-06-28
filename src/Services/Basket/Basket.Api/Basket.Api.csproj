@@ -16,6 +16,7 @@
   <ItemGroup>
     <Folder Include="Exceptions\" />
     <Folder Include="Models\" />
+    <Folder Include="EndPoints\" />
     <Folder Include="UseCases\CheckoutBasket\" />
     <Folder Include="UseCases\DeleteBasket\" />
     <Folder Include="UseCases\GetBasket\" />
