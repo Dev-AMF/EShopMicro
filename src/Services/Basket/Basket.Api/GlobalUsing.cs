@@ -4,6 +4,7 @@ global using Basket.Api.Models;
 
 
 global using System;
+global using System.Text.Json.Serialization;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Diagnostics;

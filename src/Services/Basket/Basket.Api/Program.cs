@@ -10,8 +10,15 @@ namespace Basket.Api
 
                 //Variebles
                 var assembly = typeof(Program).Assembly;
+                //
 
-                builder.Services.AddControllers();
+                builder.Services.AddMediatR(config =>
+                {
+                    config.RegisterServicesFromAssembly(assembly);
+                    config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+                    config.AddOpenBehavior(typeof(LoggingBehaviour<,>));
+                });
+                 builder.Services.AddControllers();
             }
 
 
