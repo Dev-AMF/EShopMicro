@@ -1,9 +1,6 @@
-﻿using Basket.Api.UseCases.DeleteBasket;
-using Basket.Api.UseCases.StoreBasket;
-
-namespace Basket.Api.EndPoints.Basket
+﻿namespace Basket.Api.EndPoints.Basket
 {
-    public class BasketCommandsController: BasketBaseController
+    public class BasketCommandsController: BasketBaseController, IBasketCommands
     {
         private readonly IMediator _meditor;
 

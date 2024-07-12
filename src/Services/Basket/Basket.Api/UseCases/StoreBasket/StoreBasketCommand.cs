@@ -2,14 +2,17 @@
 {
     public record StoreBasketCommand(StoreBasketRequest StoreBasketRequest) : ICommand<StoreBasketResponse>;
 
-    public class StoreBasketHandler : ICommandHandler<StoreBasketCommand,StoreBasketResponse>
+    public class StoreBasketHandler(IBasketRepository repository) : ICommandHandler<StoreBasketCommand,StoreBasketResponse>
     {
         public async Task<StoreBasketResponse> Handle(StoreBasketCommand storeBasketCommand, CancellationToken cancellationToken)
         {
-            ShoppingCart cart = storeBasketCommand.StoreBasketRequest.Adapt<ShoppingCart>();
+            var dbModel = storeBasketCommand.StoreBasketRequest.Adapt<ShoppingCart>(); 
 
+            var basketToBeStored = await repository.StoreBasketAsync(dbModel, cancellationToken);  
 
-            return new StoreBasketResponse("true");
+            var storeBasktetResponse = basketToBeStored.Adapt<StoreBasketResponse>();
+
+            return storeBasktetResponse;
         }
     }
 }

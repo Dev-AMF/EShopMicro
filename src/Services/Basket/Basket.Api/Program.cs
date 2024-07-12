@@ -10,6 +10,7 @@ namespace Basket.Api
 
                 //Variebles
                 var assembly = typeof(Program).Assembly;
+                var connString = builder.Configuration.GetConnectionString("Database");
                 //
 
                 builder.Services.AddMediatR(config =>
@@ -18,7 +19,21 @@ namespace Basket.Api
                     config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
                     config.AddOpenBehavior(typeof(LoggingBehaviour<,>));
                 });
-                 builder.Services.AddControllers();
+
+                builder.Services.AddValidatorsFromAssembly(assembly);
+
+                builder.Services.AddMarten(options =>
+                {
+                    options.Connection(connString!);
+                    options.Schema.For<ShoppingCart>().Identity(x => x.UserName); 
+                }
+                ).UseLightweightSessions();
+
+                builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+
+                builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+                builder.Services.AddControllers();
             }
 
 
@@ -30,6 +45,8 @@ namespace Basket.Api
                 app.UseRouting();
                 app.MapControllers();
 
+
+                app.UseExceptionHandler(options => { });
 
                 app.Run();
             }

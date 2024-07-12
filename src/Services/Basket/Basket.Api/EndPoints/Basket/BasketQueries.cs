@@ -1,6 +1,6 @@
 ﻿namespace Basket.Api.EndPoints.Basket
 {
-    public class BasketQueriesController : BasketBaseController
+    public class BasketQueriesController : BasketBaseController, IBasketQueries
     {
         private readonly IMediator _meditor;
 
