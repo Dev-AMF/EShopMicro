@@ -1,4 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
+using HealthChecks.UI.Client;
 
 namespace Basket.Api
 {
@@ -12,7 +12,7 @@ namespace Basket.Api
 
                 //Variebles
                 var assembly = typeof(Program).Assembly;
-                var connString = builder.Configuration.GetConnectionString("Database");
+                var connStringForPG = builder.Configuration.GetConnectionString("Database");
                 var connStringForRedis = builder.Configuration.GetConnectionString("Redis");
                 //
 
@@ -27,7 +27,7 @@ namespace Basket.Api
 
                 builder.Services.AddMarten(options =>
                 {
-                    options.Connection(connString!);
+                    options.Connection(connStringForPG!);
                     options.Schema.For<ShoppingCart>().Identity(x => x.UserName); 
                 }
                 ).UseLightweightSessions();
@@ -54,6 +54,10 @@ namespace Basket.Api
 
                 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
+                builder.Services.AddHealthChecks()
+                    .AddNpgSql(connStringForPG!)
+                    .AddRedis(connStringForRedis!);
+
                 builder.Services.AddControllers();
             }
 
@@ -68,6 +72,12 @@ namespace Basket.Api
 
 
                 app.UseExceptionHandler(options => { });
+
+                app.UseHealthChecks("/api/basket/health",
+                    new HealthCheckOptions
+                    {
+                        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+                    });
 
                 app.Run();
             }
