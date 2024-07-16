@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Basket.Api
 {
     public class Program
@@ -11,6 +13,7 @@ namespace Basket.Api
                 //Variebles
                 var assembly = typeof(Program).Assembly;
                 var connString = builder.Configuration.GetConnectionString("Database");
+                var connStringForRedis = builder.Configuration.GetConnectionString("Redis");
                 //
 
                 builder.Services.AddMediatR(config =>
@@ -29,7 +32,25 @@ namespace Basket.Api
                 }
                 ).UseLightweightSessions();
 
+                builder.Services.AddStackExchangeRedisCache(options =>
+                {
+                    options.Configuration = connStringForRedis;
+                });
+
                 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+
+                //builder.Services.AddScoped<IBasketRepository>(provider =>
+                //{
+                //    var basketRepository = provider.GetRequiredService<BasketRepository>();
+                //    var distributedCache = provider.GetRequiredService<IDistributedCache>();
+
+                //    return new ChachedBasketRepository(basketRepository, distributedCache);
+                //});
+                //===> Manually Registering Chached Implementation of BaskertRepository,
+                //As its Default Implementation With Providing Chached's Own Dependencies. <===
+
+                builder.Services.Decorate<IBasketRepository, ChachedBasketRepository>();
+
 
                 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 

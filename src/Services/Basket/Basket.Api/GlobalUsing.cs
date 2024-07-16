@@ -11,11 +11,14 @@ global using Basket.Api.UseCases._BasketEndpoints;
 
 
 global using System;
+global using System.Text.Json;
 global using System.Text.Json.Serialization;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Diagnostics;
+global using Microsoft.Extensions.Caching.Distributed;
 global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+
 
 global using BuildingBlocks.CQRS;
 global using BuildingBlocks.Behaviours;
