@@ -1,5 +1,3 @@
-using Discount.gRPC.Services;
-
 namespace Discount.gRPC
 {
     public class Program
@@ -10,6 +8,11 @@ namespace Discount.gRPC
 
             // Add services to the container.
             builder.Services.AddGrpc();
+            builder.Services
+                .AddDbContext<DiscountContext>(options => 
+                                               options.UseSqlite(
+                                               builder.Configuration.GetConnectionString("DataBase")
+                                               ));
 
             var app = builder.Build();
 
